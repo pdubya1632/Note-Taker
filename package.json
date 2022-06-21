@@ -4,11 +4,23 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write \"src/**/*.{js,json}\"",
+    "lint": "eslint src/**",
+    "start": "nodemon src/app.js",
+    "start:development": "cross-env NODE_ENV=development nodemon src/app.js",
+    "start:production": "cross-env NODE_ENV=production nodemon src/app.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4"
+    "axios": "^0.27.2",
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "eslint": "^8.18.0",
+    "eslint-plugin-react": "^7.30.0",
+    "nodemon": "^2.0.16"
   }
 }

@@ -1,0 +1,11 @@
+{
+    "development":{
+    "port":3001
+    },
+    "test":{
+    "port":4001
+    },
+    "production":{
+    "port":5001
+    }
+}
