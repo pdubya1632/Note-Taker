@@ -9,7 +9,7 @@ const { readFile, writeFile } = require("fs").promises;
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// express middleware
+// Express middleware
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());

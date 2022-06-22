@@ -5,9 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/app.js",
-    "start:development": "cross-env NODE_ENV=development nodemon src/server.js",
-    "start:production": "cross-env NODE_ENV=production nodemon src/server.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "author": "Patrick Wright",
   "license": "ISC",
@@ -15,9 +14,6 @@
     "express": "^4.18.1"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3",
-    "eslint": "^8.18.0",
-    "eslint-plugin-react": "^7.30.0",
-    "nodemon": "^1.3.3"
+    "nodemon": "^2.0.16"
   }
 }
