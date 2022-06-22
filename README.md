@@ -2,7 +2,4 @@
 UW Coding Bootcamp : Homework 09
 
 ## Description
-
-
-## Requirements
-
+A simple note taking app to view, add, and delete notes.
