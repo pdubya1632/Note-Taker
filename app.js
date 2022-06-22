@@ -1,7 +1,7 @@
 
 const express = require('express');
 const path = require('path');
-const util = require('util');
+const crypto = require('crypto');
 
 const { readFile, writeFile } = require("fs").promises;
 
@@ -29,6 +29,7 @@ app.post('/api/notes', (req, res) => {
   readFile('./db/db.json', 'utf-8').then((data) => {
       const notes = [].concat(JSON.parse(data));
       note.id = notes.length + 1
+      // note.id = crypto.randomUUID()
       notes.push(note);
       return notes;    
   }).then(( (notes) => {
@@ -38,14 +39,16 @@ app.post('/api/notes', (req, res) => {
 });
 
 // DELETE note in json
-// write uuid?
+// use uuid?
 app.delete('/api/notes/:id', (req, res) => {
-  const idDelete = parseInt(req.params.id);
+  
+  const deleteNote = parseInt(req.params.id);
+
   readFile('./db/db.json', 'utf-8').then( (data) => {
       const notes = [].concat(JSON.parse(data));
       const newNote = [];
       for (let i=0; i<notes.length; i++){
-          if (idDelete !== notes[i].id){
+          if (deleteNote !== notes[i].id){
             newNote.push(notes[i]);
           }
       }
