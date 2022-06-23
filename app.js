@@ -1,21 +1,23 @@
 
 const express = require('express');
+require('dotenv/config');
+
 const path = require('path');
-const crypto = require('crypto');
+// const crypto = require('crypto');
 
 const { readFile, writeFile } = require("fs").promises;
 
 // create app and assign port
-const app = express();
+const router = express();
 const PORT = process.env.PORT;
 
-// Express middleware
-app.use(express.static('public'));
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+// middleware
+router.use(express.static('public'));
+router.use(express.urlencoded({ extended: false }));
+router.use(express.json());
 
 // GET notes json
-app.get('/api/notes', (req, res) => {
+router.get('/api/notes', (req, res) => {
   readFile('./db/db.json', 'utf-8').then((data) =>{
       const notes = [].concat(JSON.parse(data));
       res.json(notes);
@@ -24,7 +26,7 @@ app.get('/api/notes', (req, res) => {
 
 // POST new note to json
 // write uuid?
-app.post('/api/notes', (req, res) => {
+router.post('/api/notes', (req, res) => {
   const note = req.body;
   readFile('./db/db.json', 'utf-8').then((data) => {
       const notes = [].concat(JSON.parse(data));
@@ -40,7 +42,7 @@ app.post('/api/notes', (req, res) => {
 
 // DELETE note in json
 // use uuid?
-app.delete('/api/notes/:id', (req, res) => {
+router.delete('/api/notes/:id', (req, res) => {
   
   const deleteNote = parseInt(req.params.id);
 
@@ -60,20 +62,24 @@ app.delete('/api/notes/:id', (req, res) => {
 });
 
 // GET for notes & index
-app.get('/notes', (req, res) => {
+router.get('/notes', (req, res) => {
   res.sendFile(path.join(__dirname, './public/notes.html'));
 });
 
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
 // GET for wildcard
-app.get('/*', (req, res) => {
+router.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
 // port listener 
-app.listen(PORT, () => {
-  console.log(`App listening on Port: http://localhost:${PORT}`);
-});
+router.listen(PORT, (error) =>{
+  if(!error)
+      console.log("Server running, App listening on port " + PORT)
+  else 
+      console.log("Error occurred, server can't start", error);
+  }
+);
