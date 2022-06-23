@@ -1,4 +1,4 @@
-# UWCB-09-Homework
+# Note Taker
 UW Coding Bootcamp : Homework 09
 
 ## Description
