@@ -7,7 +7,7 @@ const { readFile, writeFile } = require("fs").promises;
 
 // create app and assign port
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT;
 
 // Express middleware
 app.use(express.static('public'));
