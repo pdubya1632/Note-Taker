@@ -23,6 +23,6 @@ app.get("/*", (req, res) => {
   res.status(404).send("OH MY GOD WHAT HAVE YOU DONE???");
 });
 
-const listener = app.listen(process.env.PORT || 3000, () => {
-  console.log("Your app is listening on port " + listener.address().port);
+const listener = app.listen(process.env.PORT || 3001, () => {
+  console.log("Server started, App listening at http://localhost:" + listener.address().port);
 });
