@@ -1,37 +1,35 @@
-const { readFile, writeFile } = require("fs").promises;
+const { readFile, writeFile } = require('fs').promises;
+const crypto = require('crypto');
 
 // GET notes json
 const getNotes = (req, res, next) => {
-  readFile("./db/db.json", "utf-8").then((data) => {
+  readFile('./db/db.json', 'utf-8').then((data) => {
     const notes = [].concat(JSON.parse(data));
     res.json(notes);
   });
 };
 
 // POST new note to json
-// FUTURE : use uuid
 const postNote = (req, res, next) => {
   const note = req.body;
-  readFile("./db/db.json", "utf-8")
+  readFile('./db/db.json', 'utf-8')
     .then((data) => {
       const notes = [].concat(JSON.parse(data));
-      note.id = notes.length + 1;
-      // note.id = crypto.randomUUID()
-      notes.push(note);
-      return notes;
+      note.id = crypto.randomUUID()
+      notes.push(note)
+      return notes
     })
     .then((notes) => {
-      writeFile("./db/db.json", JSON.stringify(notes));
+      writeFile('./db/db.json', JSON.stringify(notes));
       res.json(note);
     });
 };
 
 // DELETE note in json
-// FUTURE : use uuid
 const deleteNote = (req, res, next) => {
-  const idToDelete = parseInt(req.params.id);
+  const idToDelete = req.params.id;
 
-  readFile("./db/db.json", "utf-8")
+  readFile('./db/db.json', 'utf-8')
     .then((data) => {
       const notes = [].concat(JSON.parse(data));
       const newNote = [];
@@ -43,8 +41,8 @@ const deleteNote = (req, res, next) => {
       return newNote;
     })
     .then((notes) => {
-      writeFile("./db/db.json", JSON.stringify(notes));
-      res.send("Note " + idToDelete + " deleted!");
+      writeFile('./db/db.json', JSON.stringify(notes));
+      res.send('Note ' + idToDelete + ' deleted!');
     });
 };
 
